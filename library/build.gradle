@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'robolectric'
 apply plugin: 'maven'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
@@ -28,7 +27,6 @@ dependencies {
     androidTestCompile "com.google.truth:truth:${TRUTH_VERSION}"
     androidTestCompile "junit:junit:${JUNIT_VERSION}"
     androidTestCompile "org.mockito:mockito-all:${MOCKITO_VERSION}"
-    androidTestCompile "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
     // TODO: increase this to 2.0.+ when we compile against Java 7.
     androidTestCompile "com.squareup.okhttp:mockwebserver:${MOCKWEBSERVER_VERSION}"
 }
@@ -72,9 +70,11 @@ afterEvaluate {
         }
     }
 
+/*
     findbugsTestDebug {
         enabled = false
     }
+*/
 
     check.dependsOn('findbugs')
 
@@ -95,35 +95,11 @@ afterEvaluate {
         }
     }
 
+/*
     pmdTestDebug {
         enabled = false
     }
+*/
 
     check.dependsOn('pmd')
-
-    task jacocoTestReport(type:JacocoReport, dependsOn: testDebug) {
-        def coverageSourceDirs = ['src/main/java']
-        group = "Reporting"
-        description = "Generate Jacoco coverage reports"
-
-        classDirectories = fileTree(
-                dir: 'build/intermediates/classes/debug',
-                excludes: ['**/R.class',
-                           '**/R$*.class',
-                           '**/BuildConfig.*',
-                           '**/Manifest*.*',
-                           '**/BitmapRequestBuilder.class',
-                           '**/DrawableRequestBuilder.class',
-                           '**/GifRequestBuilder.class', ]
-        )
-
-        additionalSourceDirs = files(coverageSourceDirs)
-        sourceDirectories = files(coverageSourceDirs)
-        executionData = files('build/jacoco/testDebug.exec')
-
-        reports {
-            xml.enabled = true
-            html.enabled = true
-        }
-    }
 }

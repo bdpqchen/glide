@@ -1,10 +1,13 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 
     dependencies {
-        classpath "org.robolectric:robolectric-gradle-plugin:${ROBOLECTRIC_GRADLE_VERSION}"
         classpath "com.android.tools.build:gradle:${ANDROID_GRADLE_VERSION}"
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:${COVERALLS_GRADLE_VERSION}"
     }
@@ -13,6 +16,7 @@ buildscript {
 subprojects { project ->
     repositories {
         jcenter()
+        google()
     }
 
     apply plugin: 'checkstyle'
@@ -46,6 +50,13 @@ subprojects { project ->
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+repositories {
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}
+
+wrapper {
+    gradleVersion = '2.6'
 }

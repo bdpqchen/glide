@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'robolectric'
 
 repositories {
   mavenCentral()
@@ -13,7 +12,6 @@ dependencies {
     androidTestCompile "com.google.truth:truth:${TRUTH_VERSION}"
     androidTestCompile "junit:junit:${JUNIT_VERSION}"
     androidTestCompile "org.mockito:mockito-all:${MOCKITO_VERSION}"
-    androidTestCompile "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
     androidTestCompile "com.squareup.okhttp:mockwebserver:${MOCKWEBSERVER_VERSION}"
 }
 

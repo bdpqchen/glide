@@ -28,11 +28,11 @@ def getReleaseVariantAndroidProjects() {
 }
 
 def getAndroidLibraryVariants(variantName) {
-    getInternalAndroidProjects().collect { project ->
-        project.android.libraryVariants.findAll { type ->
-            type.buildType.name.equalsIgnoreCase(variantName)
-        }
-    }.sum()
+//    getInternalAndroidProjects().collect { project ->
+//        project.android.libraryVariants.findAll { type ->
+//            type.buildType.name.equalsIgnoreCase(variantName)
+//        }
+//    }.sum()
 }
 
 def getSourceFilesForVariant(variantName) {
@@ -57,7 +57,7 @@ def getAndroidJar() {
         classpath = files(getAndroidLibraryVariants(variantName).collect {
             files(it.javaCompile.classpath.files, getAndroidJar())
         })
-        classpath += getInternalJavaProjects().collect { files(it.configurations.compile) }
+//        classpath += getInternalJavaProjects().collect { files(it.configurations.compile) }
 
         options {
             links("http://docs.oracle.com/javase/7/docs/api/")
@@ -91,7 +91,7 @@ jar {
 }
 
 getAllInternalProjects().each { project ->
-    jar.dependsOn(project.tasks.build)
+//    jar.dependsOn(project.tasks.build)
 }
 
 artifacts {

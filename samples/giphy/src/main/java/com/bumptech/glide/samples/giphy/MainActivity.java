@@ -18,6 +18,7 @@ import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.util.ViewPreloadSizeProvider;
 
 import java.util.ArrayList;
@@ -55,6 +56,9 @@ public class MainActivity extends Activity implements Api.Monitor {
         gifList.setAdapter(adapter);
         ListPreloader<Api.GifResult> preloader = new ListPreloader<Api.GifResult>(adapter, preloadSizeProvider, 2);
         gifList.setOnScrollListener(preloader);
+        Glide.with(this).load(new GlideUrl(""))
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .preload();
     }
 
     @Override
